@@ -37,7 +37,7 @@ This project demonstrates a web automation framework using Selenium, Cucumber, a
 
 1.  **Clone the repository:**
     ```bash
-    git clone <repository-url>
+    git clone https://github.com/fawziridwan/selenium-web.git
     ```
 2.  **Navigate to the project directory:**
     ```bash
