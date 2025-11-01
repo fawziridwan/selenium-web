@@ -13,5 +13,19 @@ Feature: Login with Sauce Demo
     When I try to log in with "<username>" and "<password>"
     Then I should see an error message containing "<message>"
     Examples:
-      | username        | password      | message                                                                   |
-      | standard_user   | wrong_password | Epic sadface: Username and password do not match any user in this service |
+      | username      | password       | message                                                                   |
+      | standard_user | wrong_password | Epic sadface: Username and password do not match any user in this service |
+
+  Scenario Outline: Validate The Login Form get message Mandatory
+    When I try to log in with "<username>" and "<password>"
+    Then I should see an error message containing "<message>"
+    Examples:
+      | username | password | message                            |
+      |          |          | Epic sadface: Username is required |
+
+  Scenario Outline:
+    When I try to log in with "<username>" and "<password>"
+    Then I should see an error message containing "<message>"
+    Examples:
+      | username        | password     | message                                             |
+      | locked_out_user | secret_sauce | Epic sadface: Sorry, this user has been locked out. |

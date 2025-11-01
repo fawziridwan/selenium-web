@@ -5,22 +5,23 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigReader {
-    private static Properties properties;
+    private static final Properties properties = new Properties();
 
     static {
-        try {
-            String path = "src/test/resources/configuration.properties";
-            FileInputStream input = new FileInputStream(path);
-            properties = new Properties();
+        String path = "src/test/resources/configuration.properties";
+        try (FileInputStream input = new FileInputStream(path)) {
             properties.load(input);
-            input.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Failed to load configuration.properties file from path: " + path, e);
         }
     }
 
     public static String getProperty(String key) {
-        return properties.getProperty(key);
+        String value = properties.getProperty(key);
+        if (value == null) {
+            throw new RuntimeException("Property not found in configuration.properties: " + key);
+        }
+        return value;
     }
 
     public static String getBaseUrl() {
